@@ -35,13 +35,10 @@ elif(cmd[0] == "add"):
         cmd[1] = os.path.expanduser(cmd[1])
         fname = cmd[1][cmd[1].rfind('/') + 1:]
         sp.run(['mv', cmd[1], './Music/' + fname])
-        '''
-        path = cmd[1].split('/')
-        fname = 'Music/' + path[len(path) - 1]
+        print(fname)
         for i in range(2, len(cmd)):
-            with open(cmd[i], "a") as file:
-                file.write('Music/' + fname)
-        '''
+            with open('Playlists/' + cmd[i], "a") as file:
+                file.write('../Music/' + fname + '\n')
 
 elif(args[0] == "play"):
     print("placeholder")
