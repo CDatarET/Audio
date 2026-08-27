@@ -40,7 +40,7 @@ elif(cmd[0] == "add"):
         print(fname)
         for i in range(2, len(cmd)):
             with open('Playlists/' + cmd[i], "a") as file:
-                file.write('\'../Music/' + fname + '\'\n')
+                file.write('Music/' + fname + '\n')
             
             with open('Playlists/' + cmd[i], "r") as file:
                 lines = file.readlines()
@@ -52,7 +52,15 @@ elif(cmd[0] == "add"):
             
 
 elif(cmd[0] == "play"):
-    print("placeholder")
+    if len(cmd) < 2:
+        print("Invalid arguments!")
+    else:
+        with open('Playlists/' + cmd[1], "r") as file:
+            lines = file.readlines()
+
+        for line in lines[1:]:
+            print(line[:len(line) - 1])
+            sp.run(['mpv', str(line[:len(line) - 1])])
 
 elif(cmd[0] == "pause"):
     print("placeholder")
