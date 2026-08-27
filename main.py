@@ -27,6 +27,8 @@ elif cmd[0] == "create":
     else:
         for i in range(1, len(cmd)):
             sp.run(['touch', 'Playlists/' + cmd[i]])
+            with open('Playlists/' + cmd[i], "a") as file:
+                file.write('0\n')
 
 elif(cmd[0] == "add"):
     if len(cmd) < 3:
@@ -38,10 +40,19 @@ elif(cmd[0] == "add"):
         print(fname)
         for i in range(2, len(cmd)):
             with open('Playlists/' + cmd[i], "a") as file:
-                file.write('../Music/' + fname + '\n')
+                file.write('\'../Music/' + fname + '\'\n')
+            
+            with open('Playlists/' + cmd[i], "r") as file:
+                lines = file.readlines()
 
-elif(args[0] == "play"):
+            lines[0] = str(int(lines[0]) + 1) + '\n'
+
+            with open('Playlists/' + cmd[i], "w") as file:
+                file.writelines(lines)
+            
+
+elif(cmd[0] == "play"):
     print("placeholder")
 
-elif(args[0] == "pause"):
+elif(cmd[0] == "pause"):
     print("placeholder")
